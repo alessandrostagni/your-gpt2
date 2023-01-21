@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Exclude data
+tf_dataset
+trained_model
+trained_tokenizer
+trained_config
+tokenizer
+model
+model_bn_custom
