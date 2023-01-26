@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
 import * as ecs from "aws-cdk-lib/aws-ecs"
+import * as ec2 from "aws-cdk-lib/aws-ec2"
 import { DockerImageAsset, NetworkMode } from 'aws-cdk-lib/aws-ecr-assets';
 
 export class DiscordStack extends cdk.Stack {
@@ -17,13 +18,21 @@ export class DiscordStack extends cdk.Stack {
       networkMode: NetworkMode.HOST,
     })
 
-    new ecsPatterns.ApplicationLoadBalancedEc2Service(this, 'Service', {
+    const taskDef = new ecs.FargateTaskDefinition(this, "DiscordBotTask", {
+      memoryLimitMiB: 512,
+      cpu: 256,
+    })
+    
+    taskDef.addContainer("DiscordBotContainer", {
+      image: ecs.ContainerImage.fromDockerImageAsset(asset),
+      logging: new ecs.AwsLogDriver({
+        streamPrefix: "discordbot",
+      })
+    })
+
+    new ecs.FargateService(this, "DiscordBotService", {
       cluster,
-      memoryLimitMiB: 1024,
-      taskImageOptions: {
-        image: ecs.ContainerImage.fromDockerImageAsset(asset)
-      },
-      desiredCount: 1,
+      taskDefinition: taskDef
     });
   }
 }

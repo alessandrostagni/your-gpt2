@@ -6,7 +6,7 @@ import { DiscordStack } from '../lib/discord-stack';
 const app = new cdk.App();
 new DiscordStack(app, 'DiscordStack', {
   env: { 
-    account: process.env.CDK_DEFAULT_ACCOUNT, 
+    account: "762998815470", 
     region: process.env.CDK_DEFAULT_REGION 
   }
 });
