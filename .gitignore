@@ -134,5 +134,7 @@ trained_model
 trained_tokenizer
 trained_config
 tokenizer
+tokenized_data
+training_data
 model
 model_bn_custom

@@ -1,13 +1,17 @@
+from decouple import config
+
 from BPE_token import BPE_token
 from pathlib import Path
 
 
-PATH = 'dataset'
+DATASET_PATH = config('DATASET_PATH')
+TOKENIZER_DATA_PATH = config('TOKENIZER_DATA_PATH')
 
 # the folder 'text' contains all the files
-paths = [str(x) for x in Path(f'./{PATH}/').glob("**/*.txt")]
+# TODO: Avoid loading files in memory
+paths = [str(x) for x in Path(f'./{DATASET_PATH}/').glob("**/*")]
 tokenizer = BPE_token()
-print(paths)
+
 # train the tokenizer model
 tokenizer.bpe_train(paths)
 
