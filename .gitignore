@@ -129,12 +129,6 @@ dmypy.json
 .pyre/
 
 # Exclude data
-tf_dataset
-trained_model
-trained_tokenizer
-trained_config
-tokenizer
-tokenized_data
-training_data
+
+data
 model
-model_bn_custom

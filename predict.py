@@ -1,15 +1,21 @@
-from transformers import GPT2Config, TFGPT2LMHeadModel, GPT2Tokenizer
+import sys
 
-tokenizer = GPT2Tokenizer.from_pretrained('trained_tokenizer')
-model = TFGPT2LMHeadModel.from_pretrained('trained_model')
+from decouple import config
+from transformers import TFGPT2LMHeadModel, GPT2Tokenizer
 
-text = "Hi everyone "
+TRAINED_TOKENIZER_PATH = config('TRAINED_TOKENIZER_PATH')
+OUTPUT_MODEL_PATH = config('OUTPUT_MODEL_PATH')
+
+tokenizer = GPT2Tokenizer.from_pretrained(TRAINED_TOKENIZER_PATH)
+model = TFGPT2LMHeadModel.from_pretrained(OUTPUT_MODEL_PATH)
+
+text = sys.argv[1]
 # encoding the input text
 input_ids = tokenizer.encode(text, return_tensors='tf')
 # getting out output
 beam_output = model.generate(
   input_ids,
-  max_length=50,
+  max_length=500,
   num_beams=5,
   temperature=0.7,
   no_repeat_ngram_size=2,

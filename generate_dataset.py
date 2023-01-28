@@ -7,7 +7,7 @@ from decouple import config
 from utils import load_tokenizer
 
 
-DATASET_PATH = config('DATASET_PATH')
+CLEAN_DATASET_PATH = config('CLEAN_DATASET_PATH')
 TRAIN_DATASET_PATH = config('TRAIN_DATASET_PATH')
 TOKENIZER_DATA_PATH = config('TOKENIZER_DATA_PATH')
 
@@ -20,8 +20,8 @@ tokenizer = load_tokenizer(TOKENIZER_DATA_PATH)
 
 # TODO: Avoid loading the whole text in memory
 single_string = ''
-for filename in os.listdir(DATASET_PATH):
-    with open(f'{DATASET_PATH}/{filename}', "r", encoding='utf-8') as f:
+for filename in os.listdir(CLEAN_DATASET_PATH):
+    with open(f'{CLEAN_DATASET_PATH}/{filename}', "r", encoding='utf-8') as f:
         x = f.read()
     single_string += x + tokenizer.eos_token
 
