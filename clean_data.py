@@ -11,7 +11,7 @@ CLEAN_DATASET_PATH = config('CLEAN_DATASET_PATH')
 
 accepted_chars = list(string.ascii_letters) + list(string.digits) + [' ']
 
-# the folder 'text' contains all the files
+# The folder 'text' contains all the files
 # TODO: Avoid loading files in memory
 paths = [str(x) for x in Path(f'./{DATASET_PATH}/').glob("**/*")]
 
