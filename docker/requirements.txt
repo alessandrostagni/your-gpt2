@@ -1,7 +1,7 @@
 jupyterlab==3.5.3
 keras==2.11.0
 matplotlib==3.6.3
-numpy==1.21
+numpy==1.22.0
 python-decouple==3.7
 python-dotenv==0.21.1
 git+https://github.com/huggingface/transformers.git 
